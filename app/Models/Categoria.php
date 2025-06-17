@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Categoria extends Model
 {
     use HasFactory;
+
+    public function caracteristicas()
+    {
+        return $this->belongsTo(Caracteristica::class);
+    }
+
+    public function producto()
+    {
+        return $this->belongsToMany(Producto::class)->withTimestamps();
+    }
+
+    protected $fillable = [
+        'caracteristica_id'
+    ];
 }

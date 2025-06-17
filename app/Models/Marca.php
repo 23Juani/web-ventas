@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Marca extends Model
 {
     use HasFactory;
+
+    public function caracteristicas()
+    {
+        return $this->belongsTo(Caracteristica::class);
+    }
+
+    public function productos()
+    {
+        return $this->hasMany(Producto::class);
+    }
+
+    protected $fillable = [
+        'caracteristica_id',
+    ];
 }
