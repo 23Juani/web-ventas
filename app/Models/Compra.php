@@ -27,7 +27,7 @@ class Compra extends Model
     protected $fillable = [
         'fecha_hora',
         'inpuesto',
-        'nuemro_comprobante',
+        'numero_comprobante',
         'total',
         'proveedore_id',
         'comprobante_id',

@@ -16,7 +16,7 @@ return new class extends Migration
 
             $table->dateTime('fecha_hora');
             $table->decimal('inpuesto', 8, 2)->unsigned();
-            $table->string('nuemro_comprobante', 255);
+            $table->string('numero_comprobante', 255);
             $table->decimal('total', 8, 2)->unsigned();
             $table->tinyInteger('estado')->default(1);
             $table->foreignId('proveedor_id')->nullable()->constrained('proveedores')->onDelete('set null');

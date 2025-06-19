@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoriaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,12 +15,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/template', function () {
     return view('template');
 });
+
+Route::resource('categorias', CategoriaController::class);
+
+// Route::resource(
+//     [
+//         'categorias' => CategoriaController::class,
+//     ]
+// );
+
+Route::view('/panel', 'panel.index')->name('panel');
 
 Route::get('/login', function () {
     return view('auth.login');
