@@ -3,7 +3,7 @@
         <div class="sidenav-menu">
             <div class="nav accordion" id="accordionSidenav">
                 {{-- En las siguientes lineas de codigo se maneja todo lo que es el menu de navegacion del panel de administracion --}}
-                {{-- Recursos para los iconos de la barra lateral -> https://feathericons.com/ --}}
+                {{-- Recursos para los iconos -> https://feathericons.com/ --}}
 
                 <div class="sidenav-menu-heading">Modulos</div>
 

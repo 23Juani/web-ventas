@@ -95,11 +95,15 @@
                                               </form>
                                               <div>
                                                   @if ($categoria->caracteristica->estado == 1)
-                                                      <button class="btn btn-datatable btn-icon btn-transparent-dark"><i
+                                                      <button class="btn btn-datatable btn-icon btn-transparent-dark"
+                                                          data-bs-toggle="modal"
+                                                          data-bs-target="#exampleModal-{{ $categoria->id }}"><i
                                                               data-feather="trash-2"></i>
                                                       </button>
                                                   @else
-                                                      <button class="btn btn-datatable btn-icon btn-transparent-dark"><i
+                                                      <button class="btn btn-datatable btn-icon btn-transparent-dark"
+                                                          data-bs-toggle="modal"
+                                                          data-bs-target="#exampleModal-{{ $categoria->id }}"><i
                                                               data-feather="rotate-cw"></i>
                                                       </button>
                                                   @endif
@@ -107,6 +111,35 @@
                                           </div>
                                       </td>
                                   </tr>
+
+                                  <!-- Modal -->
+                                  <div class="modal fade" id="exampleModal-{{ $categoria->id }}" tabindex="-1"
+                                      aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog">
+                                          <div class="modal-content">
+                                              <div class="modal-header">
+                                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Activar / Desactivar
+                                                      Categoria</h1>
+                                                  {{-- <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                      aria-label="Close">x</button> --}}
+                                              </div>
+                                              <div class="modal-body">
+                                                  {{ $categoria->caracteristica->estado == 1 ? '¿Desea desactivar la categoria?' : '¿Desea restaurar la categoria?' }}
+                                              </div>
+                                              <div class="modal-footer">
+                                                  <button type="button" class="btn btn-danger"
+                                                      data-bs-dismiss="modal">Cancelar</button>
+                                                  <form
+                                                      action="{{ route('categorias.destroy', ['categoria' => $categoria->id]) }}"
+                                                      method="post">
+                                                      @method('DELETE')
+                                                      @csrf
+                                                      <button type="submit" class="btn btn-primary">Confirmar</button>
+                                                  </form>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
                               @endforeach
                           </tbody>
                       </table>
@@ -118,6 +151,9 @@
   @endsection
 
   @push('js')
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous">
+      </script>
       <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
       <script src="{{ asset('assets/demo/chart-area-demo.js') }}"></script>

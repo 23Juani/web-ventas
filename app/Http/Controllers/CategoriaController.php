@@ -80,6 +80,18 @@ class CategoriaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $mesage = '';
+        $categoria = Categoria::find($id);
+        if ($categoria->caracteristica->estado == 1) {
+            Caracteristica::where('id', $categoria->caracteristica->id)
+                ->update(['estado' => 0]);
+            $mesage = 'Categoria eliminada';
+        } else {
+            Caracteristica::where('id', $categoria->caracteristica->id)
+                ->update(['estado' => 1]);
+            $mesage = 'Categoria restaurada';
+        }
+
+        return redirect()->route('categorias.index')->with('success', $mesage);
     }
 }
