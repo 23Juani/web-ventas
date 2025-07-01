@@ -35,10 +35,10 @@
           <div class="container-fluid">
               <div class="page-header-content">
                   <h1 class="page-header-title">
-                      <div class="page-header-icon"><i data-feather="archive"></i></div>
-                      <span>Categorias</span>
+                      <div class="page-header-icon"><i data-feather="codepen"></i></div>
+                      <span>Presentaciones</span>
                   </h1>
-                  <div class="page-header-subtitle">Listado de categorias</div>
+                  <div class="page-header-subtitle">Listado de presentaciones</div>
               </div>
           </div>
       </div>
@@ -46,11 +46,11 @@
       <div class="container-fluid mt-n10">
           <div class="card mb-4">
               <div class="card-header d-flex align-items-center">
-                  <a href="{{ route('categorias.create') }}">
+                  <a href="{{ route('presentaciones.create') }}">
                       <button class="btn btn-outline-primary" type="button">Agregar</button>
                   </a>
                   <span class="me-3 p-2">
-                      Tabla de categorias
+                      Tabla de presentaciones
                   </span>
               </div>
 
@@ -74,12 +74,12 @@
                               </tr>
                           </tfoot>
                           <tbody>
-                              @foreach ($categorias as $categoria)
+                              @foreach ($presentaciones as $presentacione)
                                   <tr>
-                                      <td>{{ $categoria->caracteristica->nombre }}</td>
-                                      <td>{{ $categoria->caracteristica->descripcion }}</td>
+                                      <td>{{ $presentacione->caracteristica->nombre }}</td>
+                                      <td>{{ $presentacione->caracteristica->descripcion }}</td>
                                       <td>
-                                          @if ($categoria->caracteristica->estado == 1)
+                                          @if ($presentacione->caracteristica->estado == 1)
                                               <span class="badge badge-success badge-pill">Activo</span>
                                           @else
                                               <span class="badge badge-danger badge-pill">Inactivo</span>
@@ -87,23 +87,24 @@
                                       </td>
                                       <td>
                                           <div class="d-flex justify-content-start">
-                                              <form action="{{ route('categorias.edit', ['categoria' => $categoria]) }}"
+                                              <form
+                                                  action="{{ route('presentaciones.edit', ['presentacione' => $presentacione]) }}"
                                                   method="get">
                                                   <button class="btn btn-datatable btn-icon btn-transparent-dark mr-2">
                                                       <i data-feather="edit"></i>
                                                   </button>
                                               </form>
                                               <div>
-                                                  @if ($categoria->caracteristica->estado == 1)
+                                                  @if ($presentacione->caracteristica->estado == 1)
                                                       <button class="btn btn-datatable btn-icon btn-transparent-dark"
                                                           data-bs-toggle="modal"
-                                                          data-bs-target="#exampleModal-{{ $categoria->id }}"><i
+                                                          data-bs-target="#exampleModal-{{ $presentacione->id }}"><i
                                                               data-feather="trash-2"></i>
                                                       </button>
                                                   @else
                                                       <button class="btn btn-datatable btn-icon btn-transparent-dark"
                                                           data-bs-toggle="modal"
-                                                          data-bs-target="#exampleModal-{{ $categoria->id }}"><i
+                                                          data-bs-target="#exampleModal-{{ $presentacione->id }}"><i
                                                               data-feather="rotate-cw"></i>
                                                       </button>
                                                   @endif
@@ -113,24 +114,22 @@
                                   </tr>
 
                                   <!-- Modal -->
-                                  <div class="modal fade" id="exampleModal-{{ $categoria->id }}" tabindex="-1"
+                                  <div class="modal fade" id="exampleModal-{{ $presentacione->id }}" tabindex="-1"
                                       aria-labelledby="exampleModalLabel" aria-hidden="true">
                                       <div class="modal-dialog">
                                           <div class="modal-content">
                                               <div class="modal-header">
                                                   <h1 class="modal-title fs-5" id="exampleModalLabel">Activar / Desactivar
-                                                      Categoria</h1>
-                                                  {{-- <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                      aria-label="Close">x</button> --}}
+                                                      Presentacion</h1>
                                               </div>
                                               <div class="modal-body">
-                                                  {{ $categoria->caracteristica->estado == 1 ? '¿Desea desactivar la categoria?' : '¿Desea restaurar la categoria?' }}
+                                                  {{ $presentacione->caracteristica->estado == 1 ? '¿Desea desactivar la presentacion?' : '¿Desea restaurar la presentacion?' }}
                                               </div>
                                               <div class="modal-footer">
                                                   <button type="button" class="btn btn-danger"
                                                       data-bs-dismiss="modal">Cancelar</button>
                                                   <form
-                                                      action="{{ route('categorias.destroy', ['categoria' => $categoria->id]) }}"
+                                                      action="{{ route('presentaciones.destroy', ['presentacione' => $presentacione->id]) }}"
                                                       method="post">
                                                       @method('DELETE')
                                                       @csrf

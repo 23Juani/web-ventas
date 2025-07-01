@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\PresentacioneController;
+use App\Http\Controllers\MarcaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +21,8 @@ Route::get('/', function () {
 });
 
 Route::resource('categorias', CategoriaController::class);
+Route::resource('presentaciones', PresentacioneController::class);
+Route::resource('marcas', MarcaController::class);
 
 // Route::resource(
 //     [

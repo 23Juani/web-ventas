@@ -5,11 +5,12 @@
   @push('css')
       <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
           crossorigin="anonymous" />
+
       <style>
           #descripcion {
               resize: none;
           }
-      </style>                      
+      </style>
   @endpush
 
   @section('content')
@@ -19,9 +20,9 @@
               <div class="page-header-content">
                   <h1 class="page-header-title">
                       <div class="page-header-icon"><i data-feather="archive"></i></div>
-                      <span>Categorias</span>
+                      <span>Presentaciones</span>
                   </h1>
-                  <div class="page-header-subtitle">Editar Categoria</div>
+                  <div class="page-header-subtitle">Crea una nueva presentacion</div>
               </div>
           </div>
       </div>
@@ -32,15 +33,14 @@
                   <div id="default">
                       <div class="card mb-4">
                           <div class="card-header d-flex align-items-center">
-                              <a href="{{ route('categorias.index') }}">
+                              <a href="{{ route('presentaciones.index') }}">
                                   <button class="btn btn-outline-danger" type="button">Cancelar</button>
                               </a>
                               <span class="me-3 p-2">
-                                  Editar Categoria
+                                  Crear Presentacion
                               </span>
                           </div>
-                          <form action="{{ route('categorias.update', ['categoria' => $categoria]) }}" method="post">
-                              @method('PATCH')
+                          <form action="{{ route('presentaciones.store') }}" method="post">
                               @csrf
                               <div class="card-body">
                                   <div class="sbp-preview">
@@ -48,7 +48,7 @@
                                           <div class="form-group">
                                               <label for="nombre">Nombre</label>
                                               <input class="form-control" id="nombre" type="text" name="nombre"
-                                                  value="{{ old('nombre', $categoria->caracteristica->nombre) }}" />
+                                                  value="{{ old('nombre') }}" />
                                               @error('nombre')
                                                   <small class="text-danger">{{ '*' . $message }}</small>
                                               @enderror
@@ -56,7 +56,7 @@
 
                                           <div class="form-group">
                                               <label for="descripcion">Descripcion</label>
-                                              <textarea class="form-control" id="descripcion" name="descripcion" rows="3">{{ old('descripcion', $categoria->caracteristica->descripcion) }}</textarea>
+                                              <textarea class="form-control" id="descripcion" name="descripcion" rows="3">{{ old('descripcion') }}</textarea>
                                               @error('descripcion')
                                                   <small class="text-danger">{{ '*' . $message }}</small>
                                               @enderror
@@ -65,7 +65,6 @@
 
                                       <div class="sbp-preview-text">
                                           <button class="btn btn-primary" type="submit">Guardar</button>
-                                          <button class="btn btn-secondary" type="reset">Deshacer</button>
                                       </div>
                                   </div>
                               </div>

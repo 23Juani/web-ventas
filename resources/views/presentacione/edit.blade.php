@@ -9,7 +9,7 @@
           #descripcion {
               resize: none;
           }
-      </style>                      
+      </style>
   @endpush
 
   @section('content')
@@ -19,9 +19,9 @@
               <div class="page-header-content">
                   <h1 class="page-header-title">
                       <div class="page-header-icon"><i data-feather="archive"></i></div>
-                      <span>Categorias</span>
+                      <span>Presentaciones</span>
                   </h1>
-                  <div class="page-header-subtitle">Editar Categoria</div>
+                  <div class="page-header-subtitle">Editar presentacion</div>
               </div>
           </div>
       </div>
@@ -32,14 +32,14 @@
                   <div id="default">
                       <div class="card mb-4">
                           <div class="card-header d-flex align-items-center">
-                              <a href="{{ route('categorias.index') }}">
+                              <a href="{{ route('presentaciones.index') }}">
                                   <button class="btn btn-outline-danger" type="button">Cancelar</button>
                               </a>
                               <span class="me-3 p-2">
-                                  Editar Categoria
+                                  Editar presentacion
                               </span>
                           </div>
-                          <form action="{{ route('categorias.update', ['categoria' => $categoria]) }}" method="post">
+                          <form action="{{ route('presentaciones.update', ['presentacione' => $presentacione]) }}" method="post">
                               @method('PATCH')
                               @csrf
                               <div class="card-body">
@@ -48,7 +48,7 @@
                                           <div class="form-group">
                                               <label for="nombre">Nombre</label>
                                               <input class="form-control" id="nombre" type="text" name="nombre"
-                                                  value="{{ old('nombre', $categoria->caracteristica->nombre) }}" />
+                                                  value="{{ old('nombre', $presentacione->caracteristica->nombre) }}" />
                                               @error('nombre')
                                                   <small class="text-danger">{{ '*' . $message }}</small>
                                               @enderror
@@ -56,7 +56,7 @@
 
                                           <div class="form-group">
                                               <label for="descripcion">Descripcion</label>
-                                              <textarea class="form-control" id="descripcion" name="descripcion" rows="3">{{ old('descripcion', $categoria->caracteristica->descripcion) }}</textarea>
+                                              <textarea class="form-control" id="descripcion" name="descripcion" rows="3">{{ old('descripcion', $presentacione->caracteristica->descripcion) }}</textarea>
                                               @error('descripcion')
                                                   <small class="text-danger">{{ '*' . $message }}</small>
                                               @enderror

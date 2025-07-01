@@ -17,6 +17,16 @@
                     Categorías
                 </a>
 
+                <a class="nav-link" href="{{ route('presentaciones.index') }}">
+                    <div class="nav-link-icon"><i data-feather="codepen"></i></div>
+                    Presentaciones
+                </a>
+
+                <a class="nav-link" href="{{ route('marcas.index') }}">
+                    <div class="nav-link-icon"><i data-feather="slack"></i></div>
+                    Marcas
+                </a>
+
 
                 {{-- <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
                     data-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">

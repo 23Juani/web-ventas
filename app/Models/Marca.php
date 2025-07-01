@@ -9,7 +9,7 @@ class Marca extends Model
 {
     use HasFactory;
 
-    public function caracteristicas()
+    public function caracteristica()
     {
         return $this->belongsTo(Caracteristica::class);
     }
