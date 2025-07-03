@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCaracteristicaRequest;
-use App\Http\Requests\UpdatePresentacioneStore;
+use App\Http\Requests\UpdatePresentacioneRequest;
 use App\Models\Caracteristica;
 use App\Models\Presentacione;
 use Illuminate\Http\Request;
@@ -65,7 +65,7 @@ class PresentacioneController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePresentacioneStore $request, Presentacione $presentacione)
+    public function update(UpdatePresentacioneRequest $request, Presentacione $presentacione)
     {
         Caracteristica::where('id', $presentacione->caracteristica->id)
             ->update($request->validated());

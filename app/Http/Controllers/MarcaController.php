@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCaracteristicaRequest;
+use App\Http\Requests\UpdateMarcaRequest;
 use App\Models\Caracteristica;
 use App\Models\Marca;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class MarcaController extends Controller
     public function index()
     {
         $marcas = Marca::with('caracteristica')->latest()->get();
-        return view('marca.index',['marcas' => $marcas] );
+        return view('marca.index', ['marcas' => $marcas]);
     }
 
     /**
@@ -32,7 +33,7 @@ class MarcaController extends Controller
      */
     public function store(StoreCaracteristicaRequest $request)
     {
-        
+
         try {
             DB::beginTransaction();
             $caracteristica = Caracteristica::create($request->validated());
@@ -58,17 +59,20 @@ class MarcaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Marca $marca)
     {
-        //
+        return view('marca.edit', ['marca' => $marca]);
     }
 
-    /**
+    /**     
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateMarcaRequest $request, Marca $marca)
     {
-        //
+       Caracteristica::where('id', $marca->caracteristica->id)
+            ->update($request->validated());
+
+        return redirect()->route('marcas.index')->with('success', 'Marca actualizada');
     }
 
     /**
@@ -76,6 +80,18 @@ class MarcaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $mesage = '';
+        $marca = Marca::find($id);
+        if ($marca->caracteristica->estado == 1) {
+            Caracteristica::where('id', $marca->caracteristica->id)
+                ->update(['estado' => 0]);
+            $mesage = 'Marca desactivada';
+        } else {
+            Caracteristica::where('id', $marca->caracteristica->id)
+                ->update(['estado' => 1]);
+            $mesage = 'Marca restaurada';
+        }
+
+        return redirect()->route('marcas.index')->with('success', $mesage);
     }
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\PresentacioneController;
 use App\Http\Controllers\MarcaController;
+use App\Http\Controllers\ProductoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,15 +21,14 @@ Route::get('/', function () {
     return view('template');
 });
 
-Route::resource('categorias', CategoriaController::class);
-Route::resource('presentaciones', PresentacioneController::class);
-Route::resource('marcas', MarcaController::class);
-
-// Route::resource(
-//     [
-//         'categorias' => CategoriaController::class,
-//     ]
-// );
+Route::resources(
+    [
+        'categorias' => CategoriaController::class,
+        'presentaciones' => PresentacioneController::class,
+        'marcas' => MarcaController::class,
+        'productos' => ProductoController::class
+    ]
+);
 
 Route::view('/panel', 'panel.index')->name('panel');
 

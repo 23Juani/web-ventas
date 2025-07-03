@@ -27,6 +27,11 @@
                     Marcas
                 </a>
 
+                <a class="nav-link" href="{{ route('productos.index') }}">
+                    <div class="nav-link-icon"><i data-feather="package"></i></div>
+                    Productos
+                </a>
+
 
                 {{-- <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
                     data-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">

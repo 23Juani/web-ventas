@@ -1,6 +1,6 @@
   @extends('template')
 
-  @section('title', 'Categorias')
+  @section('title', 'Productos')
 
   @push('css')
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -8,8 +8,8 @@
           crossorigin="anonymous" />
   @endpush
 
-  @section('content')
-
+  @section('content')       
+      {{-- SweetAlert2 para mostrar mensajes de éxito --}}
       @if (session('success'))
           <script>
               let message = "{{ session('success') }}";
@@ -35,10 +35,10 @@
           <div class="container-fluid">
               <div class="page-header-content">
                   <h1 class="page-header-title">
-                      <div class="page-header-icon"><i data-feather="slack"></i></div>
-                      <span>Marcas</span>
+                      <div class="page-header-icon"><i data-feather="package"></i></div>
+                      <span>Productos</span>
                   </h1>
-                  <div class="page-header-subtitle">Listado de marcas</div>
+                  <div class="page-header-subtitle">Listado de productos</div>
               </div>
           </div>
       </div>
@@ -46,11 +46,11 @@
       <div class="container-fluid mt-n10">
           <div class="card mb-4">
               <div class="card-header d-flex align-items-center">
-                  <a href="{{ route('marcas.create') }}">
+                  <a href="{{ route('productos.create') }}">
                       <button class="btn btn-outline-primary" type="button">Agregar</button>
                   </a>
                   <span class="me-3 p-2">
-                      Tabla de marcas
+                      Tabla de productos
                   </span>
               </div>
 
@@ -59,21 +59,25 @@
                       <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                           <thead>
                               <tr>
+                                  <th>Código</th>
                                   <th>Nombre</th>
-                                  <th>Descripcion</th>
+                                  <th>Marca</th>
+                                  <th>Presentación</th>
                                   <th>Estado</th>
                                   <th>Acciones</th>
                               </tr>
                           </thead>
                           <tfoot>
                               <tr>
+                                  <th>Código</th>
                                   <th>Nombre</th>
-                                  <th>Descripcion</th>
+                                  <th>Marca</th>
+                                  <th>Presentación</th>
                                   <th>Estado</th>
-                                  <th>Acciones</th>
+                                  <th>Acciones</th> 
                               </tr>
                           </tfoot>
-                          <tbody>
+                          {{-- <tbody>
                               @foreach ($marcas as $marca)
                                   <tr>
                                       <td>{{ $marca->caracteristica->nombre }}</td>
@@ -139,7 +143,7 @@
                                       </div>
                                   </div>
                               @endforeach
-                          </tbody>
+                          </tbody> --}}
                       </table>
                   </div>
               </div>
