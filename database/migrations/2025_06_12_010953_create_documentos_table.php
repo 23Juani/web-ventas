@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
 
             $table->string('tipo_docuemto', 30);
-            $table->string('numero_documento', 30);
 
             $table->timestamps();
         });

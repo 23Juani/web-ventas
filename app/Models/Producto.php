@@ -31,7 +31,7 @@ class Producto extends Model
         return $this->belongsTo(Marca::class);
     }
 
-    public function presentaciones()
+    public function presentacione()
     {
         return $this->belongsTo(Presentacione::class);
     }
@@ -45,4 +45,14 @@ class Producto extends Model
         'presentacione_id',
         'img_path',
     ];
+
+    public function handleUploadImage($image)
+    {
+        $file = $image;
+        $name = time() . $file->getClientOriginalName();
+        $file->move(public_path() . '/img/productos/', $name);
+        // Storage::putFileAs('/public/productos/',$file,$name,'public');
+
+        return $name;
+    }
 }

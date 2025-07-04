@@ -8,7 +8,7 @@
           crossorigin="anonymous" />
   @endpush
 
-  @section('content')       
+  @section('content')
       {{-- SweetAlert2 para mostrar mensajes de éxito --}}
       @if (session('success'))
           <script>
@@ -61,8 +61,10 @@
                               <tr>
                                   <th>Código</th>
                                   <th>Nombre</th>
+                                  <th>Descripción</th>
                                   <th>Marca</th>
                                   <th>Presentación</th>
+                                  <th>Categorías</th>
                                   <th>Estado</th>
                                   <th>Acciones</th>
                               </tr>
@@ -71,19 +73,36 @@
                               <tr>
                                   <th>Código</th>
                                   <th>Nombre</th>
+                                  <th>Descripción</th>
                                   <th>Marca</th>
                                   <th>Presentación</th>
+                                  <th>Categorías</th>
                                   <th>Estado</th>
-                                  <th>Acciones</th> 
+                                  <th>Acciones</th>
                               </tr>
                           </tfoot>
-                          {{-- <tbody>
-                              @foreach ($marcas as $marca)
+                          <tbody>
+                              @foreach ($productos as $item)
                                   <tr>
-                                      <td>{{ $marca->caracteristica->nombre }}</td>
-                                      <td>{{ $marca->caracteristica->descripcion }}</td>
+                                      <td>{{ $item->codigo }}</td>
+                                      <td>{{ $item->nombre }}</td>
+                                      <td>{{ $item->descripcion }}</td>
+                                      <td>{{ $item->marca->caracteristica->nombre }}</td>
+                                      <td>{{ $item->presentacione->caracteristica->nombre }}</td>
                                       <td>
-                                          @if ($marca->caracteristica->estado == 1)
+                                          @foreach ($item->categorias as $category)
+                                              <div class="d-flex justify-content-start mb-1">
+                                                  <div class="row">
+                                                      <span
+                                                          class="badge badge-yellow badge-pill">{{ $category->caracteristica->nombre }}</span>
+
+                                                  </div>
+
+                                              </div>
+                                          @endforeach
+                                      </td>
+                                      <td>
+                                          @if ($item->estado == 1)
                                               <span class="badge badge-success badge-pill">Activo</span>
                                           @else
                                               <span class="badge badge-danger badge-pill">Inactivo</span>
@@ -91,23 +110,23 @@
                                       </td>
                                       <td>
                                           <div class="d-flex justify-content-start">
-                                              <form action="{{ route('marcas.edit', ['marca' => $marca]) }}"
+                                              <form action="{{ route('productos.edit', ['producto' => $item]) }}"
                                                   method="get">
                                                   <button class="btn btn-datatable btn-icon btn-transparent-dark mr-2">
                                                       <i data-feather="edit"></i>
                                                   </button>
                                               </form>
                                               <div>
-                                                  @if ($marca->caracteristica->estado == 1)
+                                                  @if ($item->estado == 1)
                                                       <button class="btn btn-datatable btn-icon btn-transparent-dark"
                                                           data-bs-toggle="modal"
-                                                          data-bs-target="#exampleModal-{{ $marca->id }}"><i
+                                                          data-bs-target="#exampleModal-{{ $item->id }}"><i
                                                               data-feather="trash-2"></i>
                                                       </button>
                                                   @else
                                                       <button class="btn btn-datatable btn-icon btn-transparent-dark"
                                                           data-bs-toggle="modal"
-                                                          data-bs-target="#exampleModal-{{ $marca->id }}"><i
+                                                          data-bs-target="#exampleModal-{{ $item->id }}"><i
                                                               data-feather="rotate-cw"></i>
                                                       </button>
                                                   @endif
@@ -117,22 +136,22 @@
                                   </tr>
 
                                   <!-- Modal -->
-                                  <div class="modal fade" id="exampleModal-{{ $marca->id }}" tabindex="-1"
+                                  <div class="modal fade" id="exampleModal-{{ $item->id }}" tabindex="-1"
                                       aria-labelledby="exampleModalLabel" aria-hidden="true">
                                       <div class="modal-dialog">
                                           <div class="modal-content">
                                               <div class="modal-header">
                                                   <h1 class="modal-title fs-5" id="exampleModalLabel">Activar / Desactivar
-                                                      Marca</h1>
+                                                      Producto</h1>
                                               </div>
                                               <div class="modal-body">
-                                                  {{ $marca->caracteristica->estado == 1 ? '¿Desea desactivar la Marca?' : '¿Desea restaurar la Marca?' }}
+                                                  {{ $item->estado == 1 ? '¿Desea desactivar el producto?' : '¿Desea restaurar el producto?' }}
                                               </div>
                                               <div class="modal-footer">
                                                   <button type="button" class="btn btn-danger"
                                                       data-bs-dismiss="modal">Cancelar</button>
                                                   <form
-                                                      action="{{ route('marcas.destroy', ['marca' => $marca->id]) }}"
+                                                      action="{{ route('productos.destroy', ['producto' => $item->id]) }}"
                                                       method="post">
                                                       @method('DELETE')
                                                       @csrf
@@ -143,7 +162,7 @@
                                       </div>
                                   </div>
                               @endforeach
-                          </tbody> --}}
+                          </tbody>
                       </table>
                   </div>
               </div>

@@ -10,6 +10,9 @@
     <title>Web Ventas | @yield('title')</title>
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
     @stack('css')
+
+
+    
     {{-- La siguiente linea es para el icono de la pestaña del navegador --}}
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon.png') }}" />
     <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"
