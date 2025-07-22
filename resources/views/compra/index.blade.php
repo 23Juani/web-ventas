@@ -1,6 +1,6 @@
   @extends('template')
 
-  @section('title', 'Clientes')
+  @section('title', 'Compras')
 
   @push('css')
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -36,10 +36,10 @@
           <div class="container-fluid">
               <div class="page-header-content">
                   <h1 class="page-header-title">
-                      <div class="page-header-icon"><i data-feather="users"></i></div>
-                      <span>Clientes</span>
+                      <div class="page-header-icon"><i data-feather="truck"></i></div>
+                      <span>Compras</span>
                   </h1>
-                  <div class="page-header-subtitle">Listado de clientes</div>
+                  <div class="page-header-subtitle">Listado de compras</div>
               </div>
           </div>
       </div>
@@ -47,11 +47,11 @@
       <div class="container-fluid mt-n10">
           <div class="card mb-4">
               <div class="card-header d-flex align-items-center">
-                  <a href="{{ route('clientes.create') }}">
+                  <a href="{{ route('compras.create') }}">
                       <button class="btn btn-outline-primary" type="button">Agregar</button>
                   </a>
                   <span class="me-3 p-2">
-                      Tabla de clientes
+                      Tabla de compras
                   </span>
               </div>
 
@@ -60,27 +60,25 @@
                       <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                           <thead>
                               <tr>
-                                  <th>Tipo de persona</th>
-                                  <th>Razon social</th>
-                                  <th>Dirección</th>
-                                  <th>Tipo de documento</th>
-                                  <th>Número de documento</th>
-                                  <th>Estado</th>
+                                  <th>Comprobante</th>
+                                  <th>Proveedor</th>
+                                  <th>Fecha</th>
+                                  <th>Hora</th>
+                                  <th>total</th>
                                   <th>Acciones</th>
                               </tr>
                           </thead>
                           <tfoot>
                               <tr>
-                                  <th>Tipo de persona</th>
-                                  <th>Razon social</th>
-                                  <th>Dirección</th>
-                                  <th>Tipo de documento</th>
-                                  <th>Número de documento</th>
-                                  <th>Estado</th>
+                                  <th>Comprobante</th>
+                                  <th>Proveedor</th>
+                                  <th>Fecha</th>
+                                  <th>Hora</th>
+                                  <th>total</th>
                                   <th>Acciones</th>
                               </tr>
                           </tfoot>
-                          <tbody>
+                          {{-- <tbody>
                               @foreach ($clientes as $cliente)
                                   <tr>
                                       <td>{{ $cliente->persona->tipo_persona }}</td>
@@ -149,7 +147,7 @@
                                       </div>
                                   </div>
                               @endforeach
-                          </tbody>
+                          </tbody> --}}
                       </table>
                   </div>
               </div>

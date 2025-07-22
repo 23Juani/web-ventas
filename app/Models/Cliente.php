@@ -9,17 +9,15 @@ class Cliente extends Model
 {
     use HasFactory;
 
-    public function personas()
+    public function persona()
     {
         return $this->belongsTo(Persona::class);
     }
 
-    public function ventas()
+    public function venta()
     {
-        return $this->belongsTo(Venta::class);
+        return $this->hasMany(Venta::class);
     }
 
-    protected $fillable = [
-        'persona_id'
-    ];
+    protected $fillable = ['persona_id'];
 }

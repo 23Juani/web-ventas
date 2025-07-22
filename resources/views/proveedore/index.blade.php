@@ -1,6 +1,6 @@
   @extends('template')
 
-  @section('title', 'Clientes')
+  @section('title', 'Proveedores')
 
   @push('css')
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -37,9 +37,9 @@
               <div class="page-header-content">
                   <h1 class="page-header-title">
                       <div class="page-header-icon"><i data-feather="users"></i></div>
-                      <span>Clientes</span>
+                      <span>Proveedores</span>
                   </h1>
-                  <div class="page-header-subtitle">Listado de clientes</div>
+                  <div class="page-header-subtitle">Listado de proveedores</div>
               </div>
           </div>
       </div>
@@ -47,11 +47,11 @@
       <div class="container-fluid mt-n10">
           <div class="card mb-4">
               <div class="card-header d-flex align-items-center">
-                  <a href="{{ route('clientes.create') }}">
+                  <a href="{{ route('proveedores.create') }}">
                       <button class="btn btn-outline-primary" type="button">Agregar</button>
                   </a>
                   <span class="me-3 p-2">
-                      Tabla de clientes
+                      Tabla de proveedores
                   </span>
               </div>
 
@@ -81,15 +81,15 @@
                               </tr>
                           </tfoot>
                           <tbody>
-                              @foreach ($clientes as $cliente)
+                              @foreach ($proveedores as $proveedore)
                                   <tr>
-                                      <td>{{ $cliente->persona->tipo_persona }}</td>
-                                      <td>{{ $cliente->persona->razon_social }}</td>
-                                      <td>{{ $cliente->persona->direccion }}</td>
-                                      <td>{{ $cliente->persona->documento->tipo_documento }}</td>
-                                      <td>{{ $cliente->persona->numero_documento }}</td>
+                                      <td>{{ $proveedore->persona->tipo_persona }}</td>
+                                      <td>{{ $proveedore->persona->razon_social }}</td>
+                                      <td>{{ $proveedore->persona->direccion }}</td>
+                                      <td>{{ $proveedore->persona->documento->tipo_documento }}</td>
+                                      <td>{{ $proveedore->persona->numero_documento }}</td>
                                       <td>
-                                          @if ($cliente->persona->estado == 1)
+                                          @if ($proveedore->persona->estado == 1)
                                               <span class="badge badge-success badge-pill">Activo</span>
                                           @else
                                               <span class="badge badge-danger badge-pill">Inactivo</span>
@@ -97,23 +97,23 @@
                                       </td>
                                       <td>
                                           <div class="d-flex justify-content-start">
-                                              <form action="{{ route('clientes.edit', ['cliente' => $cliente]) }}"
+                                              <form action="{{ route('proveedores.edit', ['proveedore' => $proveedore]) }}"
                                                   method="get">
                                                   <button class="btn btn-datatable btn-icon btn-transparent-dark mr-2">
                                                       <i data-feather="edit"></i>
                                                   </button>
                                               </form>
                                               <div>
-                                                  @if ($cliente->persona->estado == 1)
+                                                  @if ($proveedore->persona->estado == 1)
                                                       <button class="btn btn-datatable btn-icon btn-transparent-dark"
                                                           data-bs-toggle="modal"
-                                                          data-bs-target="#exampleModal-{{ $cliente->id }}"><i
+                                                          data-bs-target="#exampleModal-{{ $proveedore->id }}"><i
                                                               data-feather="trash-2"></i>
                                                       </button>
                                                   @else
                                                       <button class="btn btn-datatable btn-icon btn-transparent-dark"
                                                           data-bs-toggle="modal"
-                                                          data-bs-target="#exampleModal-{{ $cliente->id }}"><i
+                                                          data-bs-target="#exampleModal-{{ $proveedore->id }}"><i
                                                               data-feather="rotate-cw"></i>
                                                       </button>
                                                   @endif
@@ -123,22 +123,22 @@
                                   </tr>
 
                                   <!-- Modal -->
-                                  <div class="modal fade" id="exampleModal-{{ $cliente->id }}" tabindex="-1"
+                                  <div class="modal fade" id="exampleModal-{{ $proveedore->id }}" tabindex="-1"
                                       aria-labelledby="exampleModalLabel" aria-hidden="true">
                                       <div class="modal-dialog">
                                           <div class="modal-content">
                                               <div class="modal-header">
                                                   <h1 class="modal-title fs-5" id="exampleModalLabel">Activar / Desactivar
-                                                      Cliente</h1>
+                                                      Proveedor</h1>
                                               </div>
                                               <div class="modal-body">
-                                                  {{ $cliente->persona->estado == 1 ? '¿Desea desactivar el cliente?' : '¿Desea restaurar el cliente?' }}
+                                                  {{ $proveedore->persona->estado == 1 ? '¿Desea desactivar el proveedor?' : '¿Desea restaurar el proveedor?' }}
                                               </div>
                                               <div class="modal-footer">
                                                   <button type="button" class="btn btn-danger"
                                                       data-bs-dismiss="modal">Cancelar</button>
                                                   <form
-                                                      action="{{ route('clientes.destroy', ['cliente' => $cliente->persona->id]) }}"
+                                                      action="{{ route('proveedores.destroy', ['proveedore' => $proveedore->persona->id]) }}"
                                                       method="post">
                                                       @method('DELETE')
                                                       @csrf

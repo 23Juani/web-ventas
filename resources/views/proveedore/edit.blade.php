@@ -1,6 +1,6 @@
   @extends('template')
 
-  @section('title', 'Editar Cliente')
+  @section('title', 'Editar Proveedor')
 
   @push('css')
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -23,9 +23,9 @@
               <div class="page-header-content">
                   <h1 class="page-header-title">
                       <div class="page-header-icon"><i data-feather="users"></i></div>
-                      <span>Clientes</span>
+                      <span>Proveedores</span>
                   </h1>
-                  <div class="page-header-subtitle">Editar cliente</div>
+                  <div class="page-header-subtitle">Editar proveedor</div>
               </div>
           </div>
       </div>
@@ -36,14 +36,14 @@
                   <div id="default">
                       <div class="card mb-4">
                           <div class="card-header d-flex align-items-center">
-                              <a href="{{ route('clientes.index') }}">
+                              <a href="{{ route('proveedores.index') }}">
                                   <button class="btn btn-outline-danger" type="button">Cancelar</button>
                               </a>
                               <span class="me-3 p-2">
-                                  Editando Cliente
+                                  Editando Proveedor
                               </span>
                           </div>
-                          <form action="{{ route('clientes.update', ['cliente' => $cliente]) }}" method="post">
+                          <form action="{{ route('proveedores.update', ['proveedore' => $proveedore]) }}" method="post">
                               @method('PATCH')
                               @csrf
                               <div class="card-body">
@@ -62,14 +62,14 @@
                                                   <select class="form-control selectpicker show-tick" name="tipo_persona"
                                                       id="tipo_persona">
                                                       <option value="" disabled
-                                                          {{ !$cliente->persona->tipo_persona ? 'selected' : '' }}>
+                                                          {{ !$proveedore->persona->tipo_persona ? 'selected' : '' }}>
                                                           Seleccione una
                                                           opción</option>
                                                       <option value="natural"
-                                                          {{ $cliente->persona->tipo_persona == 'natural' ? 'selected' : '' }}>
+                                                          {{ $proveedore->persona->tipo_persona == 'natural' ? 'selected' : '' }}>
                                                           Persona natural</option>
                                                       <option value="juridica"
-                                                          {{ $cliente->persona->tipo_persona == 'juridica' ? 'selected' : '' }}>
+                                                          {{ $proveedore->persona->tipo_persona == 'juridica' ? 'selected' : '' }}>
                                                           Persona jurídica</option>
                                                   </select>
                                                   @error('tipo_persona')
@@ -84,7 +84,7 @@
                                                       la empresa:</label>
                                                   <input required type="text" name="razon_social" id="razon_social"
                                                       class="form-control"
-                                                      value="{{ old('razon_social', $cliente->persona->razon_social) }}">
+                                                      value="{{ old('razon_social', $proveedore->persona->razon_social) }}">
                                                   @error('razon_social')
                                                       <small class="text-danger">{{ '*' . $message }}</small>
                                                   @enderror
@@ -95,7 +95,7 @@
                                                   <label for="direccion" class="form-label">Dirección:</label>
                                                   <input required type="text" name="direccion" id="direccion"
                                                       class="form-control"
-                                                      value="{{ old('direccion', $cliente->persona->direccion) }}">
+                                                      value="{{ old('direccion', $proveedore->persona->direccion) }}">
                                                   @error('direccion')
                                                       <small class="text-danger">{{ '*' . $message }}</small>
                                                   @enderror
@@ -107,11 +107,11 @@
                                                   <select class="form-control selectpicker show-tick" name="documento_id"
                                                       id="documento_id">
                                                       <option value="" disabled
-                                                          {{ old('documento_id', $cliente->persona->documento_id) == '' ? 'selected' : '' }}>
+                                                          {{ old('documento_id', $proveedore->persona->documento_id) == '' ? 'selected' : '' }}>
                                                           Seleccione un documento</option>
                                                       @foreach ($documentos as $item)
                                                           <option value="{{ $item->id }}"
-                                                              {{ old('documento_id', $cliente->persona->documento_id) == $item->id ? 'selected' : '' }}>
+                                                              {{ old('documento_id', $proveedore->persona->documento_id) == $item->id ? 'selected' : '' }}>
                                                               {{ $item->tipo_documento }}
                                                           </option>
                                                       @endforeach
@@ -126,7 +126,7 @@
                                                       documento:</label>
                                                   <input required type="text" name="numero_documento"
                                                       id="numero_documento" class="form-control"
-                                                      value="{{ old('numero_documento', $cliente->persona->numero_documento) }}">
+                                                      value="{{ old('numero_documento', $proveedore->persona->numero_documento) }}">
                                                   @error('numero_documento')
                                                       <small class="text-danger">{{ '*' . $message }}</small>
                                                   @enderror

@@ -15,9 +15,11 @@ class DocumentoSeeder extends Seeder
     {
         DB::table('documentos')->insert(
             [
-                ['tipo_docuemto' => 'CI'],
-                ['tipo_docuemto' => 'NIT'],
-                ['tipo_docuemto' => 'OTRO']
+                ['tipo_documento' => 'Cedula de identidad'],
+                ['tipo_documento' => 'Cédula de Extranjería'],
+                ['tipo_documento' => 'Pasaporte'],
+                ['tipo_documento' => 'Licencia de Conducción'],
+                ['tipo_documento' => 'NIT'],
             ]
         );
     }

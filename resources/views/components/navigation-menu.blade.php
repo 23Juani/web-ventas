@@ -37,6 +37,26 @@
                     Clientes
                 </a>
 
+                <a class="nav-link" href="{{ route('proveedores.index') }}">
+                    <div class="nav-link-icon"><i data-feather="user"></i></div>
+                    Proveedores
+                </a>
+
+                <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
+                    data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                    <div class="nav-link-icon"><i data-feather="truck"></i></div>
+                    Compras
+                    <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapseLayouts" data-parent="#accordionSidenav">
+                    <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavLayout">
+                        <a class="nav-link" href="{{ route('compras.index') }}">Listar compras</a>
+                        <a class="nav-link" href="{{ route('compras.create') }}">Crear compra</a>
+                    </nav>
+                </div>
+
+
+
 
                 {{-- <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
                     data-target="#collapseDashboards" aria-expanded="false" aria-controls="collapseDashboards">

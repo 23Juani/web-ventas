@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         //comando para reconstruir la base de datos y ejecutar los seeder's -> php artisan migrate:fresh --seed
 
         $this->call([DocumentoSeeder::class]);
+        $this->call([ComprobanteSeeder::class]);
         // $this->call([CaracteristicaSeeder::class]);
         // $this->call([MarcaSeeder::class]);
         // $this->call(RoleAndPermissionSeeder::class);

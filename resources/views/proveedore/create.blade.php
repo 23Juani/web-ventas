@@ -1,6 +1,6 @@
   @extends('template')
 
-  @section('title', 'Editar Cliente')
+  @section('title', 'Crear Proveedor')
 
   @push('css')
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -23,9 +23,9 @@
               <div class="page-header-content">
                   <h1 class="page-header-title">
                       <div class="page-header-icon"><i data-feather="users"></i></div>
-                      <span>Clientes</span>
+                      <span>Proveedores</span>
                   </h1>
-                  <div class="page-header-subtitle">Editar cliente</div>
+                  <div class="page-header-subtitle">Crea un nuevo proveedor</div>
               </div>
           </div>
       </div>
@@ -36,41 +36,33 @@
                   <div id="default">
                       <div class="card mb-4">
                           <div class="card-header d-flex align-items-center">
-                              <a href="{{ route('clientes.index') }}">
+                              <a href="{{ route('proveedores.index') }}">
                                   <button class="btn btn-outline-danger" type="button">Cancelar</button>
                               </a>
                               <span class="me-3 p-2">
-                                  Editando Cliente
+                                  Crear Proveedor
                               </span>
                           </div>
-                          <form action="{{ route('clientes.update', ['cliente' => $cliente]) }}" method="post">
-                              @method('PATCH')
+                          <form action="{{ route('proveedores.store') }}" method="post">
                               @csrf
                               <div class="card-body">
                                   <div class="sbp-preview">
                                       <div class="sbp-preview-content">
                                           <div class="row g-4">
+
                                               <!---Tipo de cliente---->
                                               <div class="col-md-6">
-                                                  <label for="tipo_persona" class="form-label">Tipo de cliente:</label>
-                                                  {{-- en caso que el campo tipo_persona no deseemos actualizarlo --}}
-                                                  {{-- <input required type="text" name="tipo_persona" id="tipo_persona"
-                                                      class="form-control"
-                                                      value="{{ old('tipo_persona', $cliente->persona->tipo_persona) }}"
-                                                      disabled> --}}
-                                                  {{-- En caso que el cliente sea una persona natural o jurídica para actulizarlo --}}
+                                                  <label for="tipo_persona" class="form-label">Tipo de proveedor:</label>
                                                   <select class="form-control selectpicker show-tick" name="tipo_persona"
                                                       id="tipo_persona">
-                                                      <option value="" disabled
-                                                          {{ !$cliente->persona->tipo_persona ? 'selected' : '' }}>
-                                                          Seleccione una
-                                                          opción</option>
+                                                      <option value="" selected disabled>Seleccione una opción
+                                                      </option>
                                                       <option value="natural"
-                                                          {{ $cliente->persona->tipo_persona == 'natural' ? 'selected' : '' }}>
-                                                          Persona natural</option>
+                                                          {{ old('tipo_persona') == 'natural' ? 'selected' : '' }}>Persona
+                                                          natural</option>
                                                       <option value="juridica"
-                                                          {{ $cliente->persona->tipo_persona == 'juridica' ? 'selected' : '' }}>
-                                                          Persona jurídica</option>
+                                                          {{ old('tipo_persona') == 'juridica' ? 'selected' : '' }}>Persona
+                                                          jurídica</option>
                                                   </select>
                                                   @error('tipo_persona')
                                                       <small class="text-danger">{{ '*' . $message }}</small>
@@ -83,8 +75,7 @@
                                                   <label id="label-juridica" for="razon_social" class="form-label">Nombre de
                                                       la empresa:</label>
                                                   <input required type="text" name="razon_social" id="razon_social"
-                                                      class="form-control"
-                                                      value="{{ old('razon_social', $cliente->persona->razon_social) }}">
+                                                      class="form-control" value="{{ old('razon_social') }}">
                                                   @error('razon_social')
                                                       <small class="text-danger">{{ '*' . $message }}</small>
                                                   @enderror
@@ -94,8 +85,7 @@
                                               <div class="col-md-6">
                                                   <label for="direccion" class="form-label">Dirección:</label>
                                                   <input required type="text" name="direccion" id="direccion"
-                                                      class="form-control"
-                                                      value="{{ old('direccion', $cliente->persona->direccion) }}">
+                                                      class="form-control" value="{{ old('direccion') }}">
                                                   @error('direccion')
                                                       <small class="text-danger">{{ '*' . $message }}</small>
                                                   @enderror
@@ -106,14 +96,12 @@
                                                   <label for="documento_id" class="form-label">Tipo de documento:</label>
                                                   <select class="form-control selectpicker show-tick" name="documento_id"
                                                       id="documento_id">
-                                                      <option value="" disabled
-                                                          {{ old('documento_id', $cliente->persona->documento_id) == '' ? 'selected' : '' }}>
-                                                          Seleccione un documento</option>
+                                                      <option value="" selected disabled>Seleccione una opción
+                                                      </option>
                                                       @foreach ($documentos as $item)
                                                           <option value="{{ $item->id }}"
-                                                              {{ old('documento_id', $cliente->persona->documento_id) == $item->id ? 'selected' : '' }}>
-                                                              {{ $item->tipo_documento }}
-                                                          </option>
+                                                              {{ old('documento_id') == $item->id ? 'selected' : '' }}>
+                                                              {{ $item->tipo_documento }}</option>
                                                       @endforeach
                                                   </select>
                                                   @error('documento_id')
@@ -126,7 +114,7 @@
                                                       documento:</label>
                                                   <input required type="text" name="numero_documento"
                                                       id="numero_documento" class="form-control"
-                                                      value="{{ old('numero_documento', $cliente->persona->numero_documento) }}">
+                                                      value="{{ old('numero_documento') }}">
                                                   @error('numero_documento')
                                                       <small class="text-danger">{{ '*' . $message }}</small>
                                                   @enderror
@@ -134,9 +122,9 @@
 
                                           </div>
                                       </div>
+
                                       <div class="sbp-preview-text">
                                           <button class="btn btn-primary" type="submit">Guardar</button>
-                                          <button class="btn btn-secondary" type="reset">Deshacer</button>
                                       </div>
                                   </div>
                               </div>
