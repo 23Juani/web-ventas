@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Compra extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'fecha_hora',
+        'impuesto',
+        'numero_comprobante',
+        'total',
+        'comprobante_id',
+        'proveedore_id'
+    ];
 
     public function proveedore()
     {
@@ -21,15 +29,7 @@ class Compra extends Model
 
     public function productos()
     {
-        return $this->belongsTo(Comprobante::class)->withTimestamps()->withPivot('cantidad', 'precio_compra', 'precio_venta');
+        return $this->belongsToMany(Producto::class)->withTimestamps()
+            ->withPivot('cantidad', 'precio_compra', 'precio_venta');
     }
-
-    protected $fillable = [
-        'fecha_hora',
-        'inpuesto',
-        'numero_comprobante',
-        'total',
-        'proveedore_id',
-        'comprobante_id',
-    ];
 }

@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCompraRequest;
+use App\Models\Compra;
 use App\Models\Comprobante;
 use App\Models\Producto;
 use App\Models\Proveedore;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CompraController extends Controller
 {
@@ -34,9 +38,54 @@ class CompraController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCompraRequest $request)
     {
-        //
+        dd($request->all());
+        try {
+            DB::beginTransaction();
+
+            //Llenar tabla compras
+            $compra = Compra::create($request->validated());
+
+            //Llenar tabla compra_producto
+            //1.Recuperar los arrays
+            $arrayProducto_id = $request->get('arrayidproducto');
+            $arrayCantidad = $request->get('arraycantidad');
+            $arrayPrecioCompra = $request->get('arraypreciocompra');
+            $arrayPrecioVenta = $request->get('arrayprecioventa');
+
+            //2.Realizar el llenado
+            $siseArray = count($arrayProducto_id);
+            $cont = 0;
+            while ($cont < $siseArray) {
+                $compra->productos()->syncWithoutDetaching([
+                    $arrayProducto_id[$cont] => [
+                        'cantidad' => $arrayCantidad[$cont],
+                        'precio_compra' => $arrayPrecioCompra[$cont],
+                        'precio_venta' => $arrayPrecioVenta[$cont]
+                    ]
+                ]);
+
+                //3.Actualizar el stock
+                $producto = Producto::find($arrayProducto_id[$cont]);
+                $stockActual = $producto->stock;
+                $stockNuevo = intval($arrayCantidad[$cont]);
+
+                DB::table('productos')
+                    ->where('id', $producto->id)
+                    ->update([
+                        'stock' => $stockActual + $stockNuevo
+                    ]);
+
+                $cont++;
+            }
+
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+        }
+
+        return redirect()->route('compras.index')->with('success', 'compra exitosa');
     }
 
     /**

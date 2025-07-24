@@ -21,12 +21,12 @@ class StoreProductoRequest extends FormRequest
      */
     public function rules(): array
     {
-         return [
+        return [
             'codigo' => 'required|unique:productos,codigo|max:50',
             'nombre' => 'required|unique:productos,nombre|max:80',
             'descripcion' => 'nullable|max:255',
             'fecha_vencimiento' => 'nullable|date',
-            'img_path' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+            'img_path' => 'nullable|image|mimes:png,jpg,jpeg|max:5120',
             'marca_id' => 'required|integer|exists:marcas,id',
             'presentacione_id' => 'required|integer|exists:presentaciones,id',
             'categorias' => 'required'

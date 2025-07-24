@@ -50,8 +50,8 @@
                 </a>
                 <div class="collapse" id="collapseLayouts" data-parent="#accordionSidenav">
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavLayout">
-                        <a class="nav-link" href="{{ route('compras.index') }}">Listar compras</a>
-                        <a class="nav-link" href="{{ route('compras.create') }}">Crear compra</a>
+                        <a class="nav-link" href="{{ route('compras.index') }}">Ver</a>
+                        <a class="nav-link" href="{{ route('compras.create') }}">Crear</a>
                     </nav>
                 </div>
 

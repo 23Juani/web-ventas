@@ -9,6 +9,16 @@ class Producto extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'codigo',
+        'nombre',
+        'descripcion',
+        'fecha_vencimiento',
+        'marca_id',
+        'presentacione_id',
+        'img_path'
+    ];
+
     public function compras()
     {
         return $this->belongsToMany(Compra::class)->withTimestamps()
@@ -23,7 +33,7 @@ class Producto extends Model
 
     public function categorias()
     {
-        return $this->belongsToMany(Categoria::class);
+        return $this->belongsToMany(Categoria::class)->withTimestamps();
     }
 
     public function marca()
@@ -36,22 +46,12 @@ class Producto extends Model
         return $this->belongsTo(Presentacione::class);
     }
 
-    protected $fillable = [
-        'codigo',
-        'nombre',
-        'descripcion',
-        'fecha_vencimiento',
-        'marca_id',
-        'presentacione_id',
-        'img_path',
-    ];
-
     public function handleUploadImage($image)
     {
         $file = $image;
         $name = time() . $file->getClientOriginalName();
         $file->move(public_path() . '/img/productos/', $name);
-        // Storage::putFileAs('/public/productos/',$file,$name,'public');
+        // Storage::putFileAs('/public/productos/', $file, $name, 'public');
 
         return $name;
     }

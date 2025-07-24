@@ -12,13 +12,15 @@
     @stack('css')
 
 
-    
+
     {{-- La siguiente linea es para el icono de la pestaña del navegador --}}
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon.png') }}" />
     <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous">
     </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
 </head>
 
 <body class="nav-fixed">

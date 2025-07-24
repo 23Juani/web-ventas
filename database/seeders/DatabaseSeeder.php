@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([DocumentoSeeder::class]);
         $this->call([ComprobanteSeeder::class]);
+        $this->call([UserSeeder::class]);
         // $this->call([CaracteristicaSeeder::class]);
         // $this->call([MarcaSeeder::class]);
         // $this->call(RoleAndPermissionSeeder::class);
