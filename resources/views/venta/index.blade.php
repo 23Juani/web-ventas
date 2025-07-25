@@ -36,10 +36,10 @@
           <div class="container-fluid">
               <div class="page-header-content">
                   <h1 class="page-header-title">
-                      <div class="page-header-icon"><i data-feather="truck"></i></div>
-                      <span>Compras</span>
+                      <div class="page-header-icon"><i data-feather="shopping-cart"></i></div>
+                      <span>Ventas</span>
                   </h1>
-                  <div class="page-header-subtitle">Listado de compras</div>
+                  <div class="page-header-subtitle">Listado de ventas</div>
               </div>
           </div>
       </div>
@@ -47,11 +47,11 @@
       <div class="container-fluid mt-n10">
           <div class="card mb-4">
               <div class="card-header d-flex align-items-center">
-                  <a href="{{ route('compras.create') }}">
+                  <a href="{{ route('ventas.create') }}">
                       <button class="btn btn-outline-primary" type="button">Agregar</button>
                   </a>
                   <span class="me-3 p-2">
-                      Tabla de compras
+                      Tabla de ventas
                   </span>
               </div>
 
@@ -62,7 +62,7 @@
                               <tr>
                                   <th>Tipo de comprobante</th>
                                   <th>Numero de comprobante</th>
-                                  <th>Tipo de proveedor</th>
+                                  <th>Tipo de cliente</th>
                                   <th>Razon social</th>
                                   <th>Fecha</th>
                                   <th>Hora</th>
@@ -74,7 +74,7 @@
                               <tr>
                                   <th>Tipo de comprobante</th>
                                   <th>Numero de comprobante</th>
-                                  <th>Tipo de proveedor</th>
+                                  <th>Tipo de cliente</th>
                                   <th>Razon social</th>
                                   <th>Fecha</th>
                                   <th>Hora</th>
@@ -83,12 +83,12 @@
                               </tr>
                           </tfoot>
                           <tbody>
-                              @foreach ($compras as $item)
+                              @foreach ($ventas as $item)
                                   <tr>
                                       <td>{{ $item->comprobante->tipo_comprobante }} </td>
                                       <td>{{ $item->numero_comprobante }}</td>
-                                      <td>{{ ucfirst($item->proveedore->persona->tipo_persona) }}</td>
-                                      <td>{{ $item->proveedore->persona->razon_social }}</td>
+                                      <td>{{ ucfirst($item->cliente->persona->tipo_persona) }}</td>
+                                      <td>{{ $item->cliente->persona->razon_social }}</td>
                                       <td><span class="m-1"><i
                                                   class="fa-solid fa-calendar-days"></i></span>{{ \Carbon\Carbon::parse($item->fecha_hora)->format('d-m-Y') }}
                                       </td>
@@ -96,13 +96,13 @@
                                           <span class="m-1"><i
                                                   class="fa-solid fa-clock"></i></span>{{ \Carbon\Carbon::parse($item->fecha_hora)->format('H:i') }}
                                       </td>
-                                      <td> {{ $item->total }} Bs.</td>
+                                      <td> {{ $item->total }}</td>
                                       <td>
                                           <div class="d-flex justify-content-start">
-                                              <form action="{{ route('compras.show', ['compra' => $item]) }}"
+                                              <form action="{{ route('ventas.show', ['venta' => $item]) }}"
                                                   method="get">
                                                   <button class="btn btn-datatable btn-icon btn-transparent-dark mr-2">
-                                                      <i data-feather="eye"></i>
+                                                      <i data-feather="book"></i>
                                                   </button>
                                               </form>
                                               <div>
@@ -111,6 +111,7 @@
                                                       data-bs-target="#exampleModal-{{$item->id}}"><i
                                                           data-feather="trash-2"></i>
                                                   </button>
+
                                               </div>
                                           </div>
                                       </td>
@@ -122,16 +123,16 @@
                                       <div class="modal-dialog">
                                           <div class="modal-content">
                                               <div class="modal-header">
-                                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar compra</h1>
+                                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar venta</h1>
                                               </div>
                                               <div class="modal-body">
-                                                  ¿Seguro que quieres eliminar la compra?
+                                                  ¿Seguro que quieres eliminar la venta?
                                               </div>
                                               <div class="modal-footer">
                                                   <button type="button" class="btn btn-danger"
                                                       data-bs-dismiss="modal">Cancelar</button>
                                                   <form
-                                                      action="{{ route('compras.destroy',['compra'=>$item->id]) }}"
+                                                      action="{{ route('ventas.destroy',['venta'=>$item->id]) }}"
                                                       method="post">
                                                       @method('DELETE')
                                                       @csrf

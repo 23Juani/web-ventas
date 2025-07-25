@@ -41,7 +41,7 @@
                     <div class="nav-link-icon"><i data-feather="user"></i></div>
                     Proveedores
                 </a>
-
+                {{-- crear compras --}}
                 <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
                     data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                     <div class="nav-link-icon"><i data-feather="truck"></i></div>
@@ -52,6 +52,19 @@
                     <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavLayout">
                         <a class="nav-link" href="{{ route('compras.index') }}">Ver</a>
                         <a class="nav-link" href="{{ route('compras.create') }}">Crear</a>
+                    </nav>
+                </div>
+                {{-- crear ventas --}}
+                <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
+                    data-target="#collapseVentas" aria-expanded="false" aria-controls="collapseLayouts">
+                    <div class="nav-link-icon"><i data-feather="shopping-cart"></i></div>
+                    Ventas
+                    <div class="sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="collapseVentas" data-parent="#accordionSidenav">
+                    <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavLayout">
+                        <a class="nav-link" href="{{ route('ventas.index') }}">Ver</a>
+                        <a class="nav-link" href="{{ route('ventas.create') }}">Crear</a>
                     </nav>
                 </div>
 
@@ -73,7 +86,7 @@
                                 class="badge badge-primary ml-2">New!</span></a>
                     </nav>
                 </div> --}}
-                <div class="sidenav-menu-heading">Interface</div>
+                {{-- <div class="sidenav-menu-heading">Interface</div>
                 <a class="nav-link collapsed" href="javascript:void(0);" data-toggle="collapse"
                     data-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                     <div class="nav-link-icon"><i data-feather="layout"></i></div>
@@ -199,13 +212,13 @@
                 <div class="collapse" id="collapseFlows" data-parent="#accordionSidenav">
                     <nav class="sidenav-menu-nested nav"><a class="nav-link"
                             href="multi-tenant-select.html">Multi-Tenant Registration</a></nav>
-                </div>
+                </div> --}}
                 <div class="sidenav-menu-heading">Addons</div>
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="#">
                     <div class="nav-link-icon"><i data-feather="bar-chart"></i></div>
                     Charts
                 </a>
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="#">
                     <div class="nav-link-icon"><i data-feather="filter"></i></div>
                     Tables
                 </a>

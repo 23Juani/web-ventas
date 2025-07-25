@@ -18,7 +18,12 @@ class CompraController extends Controller
      */
     public function index()
     {
-        return view('compra.index');
+        $compras = Compra::with('comprobante', 'proveedore.persona')
+            ->where('estado', 1)
+            ->latest()
+            ->get();
+
+        return view('compra.index', compact('compras'));
     }
 
     /**
@@ -40,7 +45,8 @@ class CompraController extends Controller
      */
     public function store(StoreCompraRequest $request)
     {
-        dd($request->all());
+        // // Log::info('Entró al método store');
+        //  dd($request->all());
         try {
             DB::beginTransaction();
 
@@ -91,9 +97,9 @@ class CompraController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Compra $compra)
     {
-        //
+        return view('compra.show', compact('compra'));
     }
 
     /**
@@ -117,6 +123,11 @@ class CompraController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Compra::where('id', $id)
+            ->update([
+                'estado' => 0
+            ]);
+
+        return redirect()->route('compras.index')->with('success', 'Compra eliminada');
     }
 }

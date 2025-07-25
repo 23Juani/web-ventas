@@ -1,6 +1,6 @@
   @extends('template')
 
-  @section('title', 'Ver compra')
+  @section('title', 'Ver venta')
 
   @push('css')
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -28,7 +28,7 @@
                   <div class="card-header d-flex align-items-center">
                       <div class="d-flex justify-content-center w-100">
                           <h1 class="text-primary">
-                              <span class="me-3 p-2 mb-0 ">Datos generales de la compra</span>
+                              <span class="me-3 p-2 mb-0 ">Datos generales de la venta</span>
                           </h1>
                       </div>
                   </div>
@@ -48,7 +48,7 @@
                                           <span title="Tipo de comprobante" id="icon-form" class="input-group-text"><i
                                                   class="fa-solid fa-file"></i></span>
                                           <input disabled type="text" class="form-control"
-                                              value="{{ $compra->comprobante->tipo_comprobante }}">
+                                              value="{{ $venta->comprobante->tipo_comprobante }}">
                                       </div>
                                   </div>
                                   <!---Numero comprobante--->
@@ -64,14 +64,14 @@
                                           <span title="Número de comprobante" id="icon-form" class="input-group-text"><i
                                                   class="fa-solid fa-hashtag"></i></span>
                                           <input disabled type="text" class="form-control"
-                                              value="{{ $compra->numero_comprobante }}">
+                                              value="{{ $venta->numero_comprobante }}">
                                       </div>
                                   </div>
                                   <!---Tipo proveedor--->
                                   <div class="col-sm-6 my-2">
                                       <div class="input-group" id="hide-group">
                                           <span class="input-group-text"><i class="fa-solid fa-user-tie"></i></span>
-                                          <input disabled type="text" class="form-control" value="Proveedor: ">
+                                          <input disabled type="text" class="form-control" value="Cliente:">
                                       </div>
                                   </div>
                                   <div class="col-sm-6 my-2">
@@ -79,7 +79,22 @@
                                           <span title="Proveedor" id="icon-form" class="input-group-text"><i
                                                   class="fa-solid fa-user-tie"></i></span>
                                           <input disabled type="text" class="form-control"
-                                              value="{{ $compra->proveedore->persona->razon_social }}">
+                                              value="{{ $venta->cliente->persona->razon_social }}">
+                                      </div>
+                                  </div>
+                                  {{-- vendedor --}}
+                                  <div class="col-sm-6 my-2">
+                                      <div class="input-group" id="hide-group">
+                                          <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                                          <input disabled type="text" class="form-control" value="Vendedor :">
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-6 my-2">
+                                      <div class="input-group">
+                                          <span title="Proveedor" id="icon-form" class="input-group-text"><i
+                                                  class="fa-solid fa-user-tie"></i></span>
+                                          <input disabled type="text" class="form-control"
+                                              value="{{$venta->user->name}}">
                                       </div>
                                   </div>
                                   <!---Fecha--->
@@ -94,7 +109,7 @@
                                           <span title="Fecha" id="icon-form" class="input-group-text"><i
                                                   class="fa-solid fa-calendar-days"></i></span>
                                           <input disabled type="text" class="form-control"
-                                              value="{{ \Carbon\Carbon::parse($compra->fecha_hora)->format('d-m-Y') }}">
+                                              value="{{ \Carbon\Carbon::parse($venta->fecha_hora)->format('d-m-Y') }}">
                                       </div>
                                   </div>
                                   {{-- hora --}}
@@ -109,7 +124,7 @@
                                           <span title="Hora" id="icon-form" class="input-group-text"><i
                                                   class="fa-solid fa-clock"></i></span>
                                           <input disabled type="text" class="form-control"
-                                              value="{{ \Carbon\Carbon::parse($compra->fecha_hora)->format('H:i') }}">
+                                              value="{{ \Carbon\Carbon::parse($venta->fecha_hora)->format('H:i') }}">
                                       </div>
                                   </div>
                                   {{-- impuesto --}}
@@ -124,35 +139,32 @@
                                           <span title="Impuesto" id="icon-form" class="input-group-text"><i
                                                   class="fa-solid fa-percent"></i></span>
                                           <input disabled type="text" id="input-impuesto" class="form-control"
-                                              value="{{ $compra->impuesto }}">
+                                              value="{{ $venta->impuesto }}">
                                       </div>
                                   </div>
-                                  {{-- tabla del detalle de la compra --}}
                                   <div class="col-sm-12 my-2">
-                                      {{-- titulo de card --}}
                                       <div class="card-header d-flex align-items-center">
                                           <div class="d-flex justify-content-center w-100">
                                               <span>
-                                                  Tabla de detalle de la compra
+                                                  Tabla de detalle de la venta
                                               </span>
                                           </div>
                                       </div>
-                                      {{-- Cuerpo del carta(card) --}}
                                       <div class="card-body">
                                           <div class="datatable table-responsive">
                                               <table class="table table-bordered table-hover" id="dataTable"
                                                   width="100%" cellspacing="0">
                                                   <thead>
                                                       <tr>
-                                                          <th>Cantidad</th>
-                                                          <th>Precio de compra</th>
                                                           <th>Producto</th>
+                                                          <th>Cantidad</th>
                                                           <th>Precio de venta</th>
+                                                          <th>Descuento</th>
                                                           <th>Subtotal</th>
                                                       </tr>
                                                   </thead>
                                                   <tbody>
-                                                      @forelse ($compra->productos as $item)
+                                                      @forelse ($venta->productos as $item)
                                                           <tr>
                                                               <td>
                                                                   {{ $item->nombre }}
@@ -161,13 +173,13 @@
                                                                   {{ $item->pivot->cantidad }}
                                                               </td>
                                                               <td>
-                                                                  {{ $item->pivot->precio_compra }}
-                                                              </td>
-                                                              <td>
                                                                   {{ $item->pivot->precio_venta }}
                                                               </td>
+                                                              <td>
+                                                                  {{ $item->pivot->descuento }}
+                                                              </td>
                                                               <td class="td-subtotal">
-                                                                  {{ $item->pivot->cantidad * $item->pivot->precio_compra }}
+                                                                  {{ $item->pivot->cantidad * $item->pivot->precio_venta - $item->pivot->descuento }}
                                                               </td>
                                                           </tr>
                                                       @empty
@@ -186,7 +198,7 @@
                                                           <th id="th-suma"></th>
                                                       </tr>
                                                       <tr>
-                                                          <th colspan="4">Impuestos:</th>
+                                                          <th colspan="4">IGV:</th>
                                                           <th id="th-igv"></th>
                                                       </tr>
                                                       <tr>
@@ -201,7 +213,7 @@
                               </div>
                               <div class="col-md-12 my-2 d-flex justify-content-end">
                                   <div class="col-sm-3 my-2">
-                                      <a href="{{ route('compras.index') }}">
+                                      <a href="{{ route('ventas.index') }}">
                                           <button type="button" class="btn btn-outline-secondary w-100">Volver</button>
                                       </a>
                                   </div>
