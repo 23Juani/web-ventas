@@ -260,7 +260,7 @@
                                                   <input type="hidden" name="fecha_hora" value="{{ $fecha_hora }}">
                                               </div>
                                               {{-- user autenticado  --}}
-                                              <input type="hidden" name="user_id" value="1 {{-- {{ auth()->user()->id }} --}}">
+                                              <input type="hidden" name="user_id" value=" {{ auth()->user()->id }} ">
                                               {{-- boton para resgistrar la compra --}}
                                               <div class="col-md-12 mb-2 mt-2 d-flex justify-content-center">
                                                   <button type="submit" id="guardar"
@@ -426,16 +426,16 @@
               $('#tabla_detalle tbody').empty();
 
               //Añadir una nueva fila a la tabla
-            //   let fila = '<tr>' +
-            //       '<th></th>' +
-            //       '<td></td>' +
-            //       '<td></td>' +
-            //       '<td></td>' +
-            //       '<td></td>' +
-            //       '<td></td>' +
-            //       '<td></td>' +
-            //       '</tr>';
-            //   $('#tabla_detalle').append(fila);
+              //   let fila = '<tr>' +
+              //       '<th></th>' +
+              //       '<td></td>' +
+              //       '<td></td>' +
+              //       '<td></td>' +
+              //       '<td></td>' +
+              //       '<td></td>' +
+              //       '<td></td>' +
+              //       '</tr>';
+              //   $('#tabla_detalle').append(fila);
 
               //Reiniciar valores de las variables
               cont = 0;

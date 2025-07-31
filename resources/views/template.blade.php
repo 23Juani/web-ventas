@@ -22,30 +22,30 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
 </head>
+@auth
+    <body class="nav-fixed">
 
-<body class="nav-fixed">
+        <x-navigation-header />
 
-    <x-navigation-header />
+        <div id="layoutSidenav">
 
-    <div id="layoutSidenav">
+            <x-navigation-menu />
 
-        <x-navigation-menu />
-
-        <div id="layoutSidenav_content">
-            <main>
-                @yield('content')
-            </main>
-            <x-footer />
+            <div id="layoutSidenav_content">
+                <main>
+                    @yield('content')
+                </main>
+                <x-footer />
+            </div>
         </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous">
-    </script>
-    <script src="{{ asset('js/scripts.js') }}"></script>
-
-    @stack('js')
-
-
-</body>
-
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous">
+        </script>
+        <script src="{{ asset('js/scripts.js') }}"></script>
+        @stack('js')
+    </body>
+@endauth
+@guest
+    @include('pages.401')
+@endguest
 </html>

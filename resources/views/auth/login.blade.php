@@ -10,10 +10,12 @@
     <title>Login - SB Admin Pro</title>
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
-    <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous">
-    </script>
+    {{-- <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js"
+        crossorigin="anonymous"></script> --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous">
+    </script> --}}
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body class="bg-primary">
@@ -25,34 +27,54 @@
                         <div class="col-lg-5">
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
                                 <div class="card-header justify-content-center">
-                                    <h3 class="font-weight-light my-4">Login</h3>
+                                    <h3 class="font-weight-light my-4">Iniciar Sesión</h3>
                                 </div>
                                 <div class="card-body">
-                                    <form>
-                                        <div class="form-group"><label class="small mb-1"
-                                                for="inputEmailAddress">Email</label><input class="form-control py-4"
-                                                id="inputEmailAddress" type="email"
-                                                placeholder="Enter email address" /></div>
-                                        <div class="form-group"><label class="small mb-1"
-                                                for="inputPassword">Password</label><input class="form-control py-4"
-                                                id="inputPassword" type="password" placeholder="Enter password" /></div>
+                                    @if ($errors->any())
+                                        @foreach ($errors->all() as $item)
+                                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                {{ $item }}
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                    <form action="/login" method="POST">
+                                        @csrf
                                         <div class="form-group">
-                                            <div class="custom-control custom-checkbox"><input
-                                                    class="custom-control-input" id="rememberPasswordCheck"
-                                                    type="checkbox" /><label class="custom-control-label"
-                                                    for="rememberPasswordCheck">Remember password</label></div>
+                                            <label class="small mb-1" for="inputEmailAddress">Correo</label>
+                                            <input class="form-control py-4" id="inputEmailAddress" type="email"
+                                                name="email" placeholder="Ingresa tu correo" />
                                         </div>
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="inputPassword">Contaseña</label>
+                                            <input class="form-control py-4" id="inputPassword" type="password"
+                                                name="password" placeholder="Introduce tu contraseña" />
+                                        </div>
+                                        {{-- <div class="form-group">
+                                            <div class="custom-control custom-checkbox">
+                                                <input class="custom-control-input" id="rememberPasswordCheck"
+                                                    type="checkbox" />
+                                                <label class="custom-control-label" for="rememberPasswordCheck">Remember
+                                                    password</label>
+                                            </div>
+                                        </div> --}}
                                         <div
                                             class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                            <a class="small" href="password-basic.html">Forgot Password?</a><a
-                                                class="btn btn-primary" href="index.html">Login</a>
+                                            {{-- <a class="small" href="password-basic.html">Forgot Password?</a> --}}
+                                            {{-- <a href="#"> --}}
+                                            <button type="submit" class="btn btn-primary">
+                                                Login
+                                            </button>
+                                            {{-- </a> --}}
                                         </div>
                                     </form>
                                 </div>
-                                <div class="card-footer text-center">
-                                    <div class="small"><a href="register-basic.html">Need an account? Sign up!</a>
+                                {{-- <div class="card-footer text-center">
+                                    <div class="small">
+                                        <a href="register-basic.html">Need an account? Sign up!</a>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -77,6 +99,8 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="{{ asset('js/scripts.js') }}"></script>
 </body>
 
