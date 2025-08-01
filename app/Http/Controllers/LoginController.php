@@ -17,16 +17,24 @@ class LoginController extends Controller
     }
     public function login(LoginRequest $request)
     {
-        // dd($request);
-        if (!Auth::validate($request->only('email', 'password'))) {
-            return redirect()->to('login')->withErrors('Credenciales incorrectas');
+        if (Auth::attempt($request->only('email', 'password'))) {
+            // Redirige a la ruta 'panel' tras un inicio de sesión exitoso
+            return redirect()->route('panel');
         }
 
+        // Si las credenciales son incorrectas, redirige con un error
+        return redirect()->route('login')->withErrors('Credenciales incorrectas');
+
+        // dd($request);
+        // if (!Auth::validate($request->only('email', 'password'))) {
+        //     return redirect()->to('login')->withErrors('Credenciales incorrectas');
+        // }
+
         //Crear una sesión
-        $user = Auth::getProvider()->retrieveByCredentials($request->only('email', 'password'));
-        Auth::login($user);
+        // $user = Auth::getProvider()->retrieveByCredentials($request->only('email', 'password'));
+        // Auth::login($user);
 
         //  return redirect()->route('panel')->with('success', 'Bienvenido '.$user->name);
-        return redirect()->route('panel');
+        // return redirect()->route('panel');
     }
 }

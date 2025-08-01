@@ -1,6 +1,6 @@
   @extends('template')
 
-  @section('title', 'Categorias')
+  @section('title', 'roles')
 
   @push('css')
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -9,7 +9,7 @@
   @endpush
 
   @section('content')
-
+      {{-- SweetAlert2 para mostrar mensajes de éxito --}}
       @if (session('success'))
           <script>
               let message = "{{ session('success') }}";
@@ -35,10 +35,10 @@
           <div class="container-fluid">
               <div class="page-header-content">
                   <h1 class="page-header-title">
-                      <div class="page-header-icon"><i data-feather="archive"></i></div>
-                      <span>Categorias</span>
+                      <div class="page-header-icon"><i data-feather="clipboard"></i></div>
+                      <span>Roles</span>
                   </h1>
-                  <div class="page-header-subtitle">Listado de categorias</div>
+                  <div class="page-header-subtitle">Listado de roles</div>
               </div>
           </div>
       </div>
@@ -46,13 +46,11 @@
       <div class="container-fluid mt-n10">
           <div class="card mb-4">
               <div class="card-header d-flex align-items-center">
-                  @can('crear-categoria')
-                      <a href="{{ route('categorias.create') }}">
-                          <button class="btn btn-outline-primary" type="button">Agregar</button>
-                      </a>
-                  @endcan
+                  <a href="{{ route('roles.create') }}">
+                      <button class="btn btn-outline-primary" type="button">Agregar</button>
+                  </a>
                   <span class="me-3 p-2">
-                      Tabla de categorias
+                      Tabla de roles
                   </span>
               </div>
 
@@ -61,82 +59,61 @@
                       <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                           <thead>
                               <tr>
-                                  <th>Nombre</th>
-                                  <th>Descripcion</th>
-                                  <th>Estado</th>
+                                  <th>Rol</th>
                                   <th>Acciones</th>
                               </tr>
                           </thead>
                           <tfoot>
                               <tr>
-                                  <th>Nombre</th>
-                                  <th>Descripcion</th>
-                                  <th>Estado</th>
+                                  <th>Rol</th>
                                   <th>Acciones</th>
                               </tr>
                           </tfoot>
                           <tbody>
-                              @foreach ($categorias as $categoria)
+                              @foreach ($roles as $item)
                                   <tr>
-                                      <td>{{ $categoria->caracteristica->nombre }}</td>
-                                      <td>{{ $categoria->caracteristica->descripcion }}</td>
-                                      <td>
-                                          @if ($categoria->caracteristica->estado == 1)
+                                      <td>{{ $item->name }}</td>
+                                      {{-- <td>
+                                          @if ($item->estado == 1)
                                               <span class="badge badge-success badge-pill">Activo</span>
                                           @else
                                               <span class="badge badge-danger badge-pill">Inactivo</span>
                                           @endif
-                                      </td>
+                                      </td> --}}
                                       <td>
                                           <div class="d-flex justify-content-start">
-                                              @can('editar-categoria')
-                                                  <form action="{{ route('categorias.edit', ['categoria' => $categoria]) }}"
-                                                      method="get">
-                                                      <button class="btn btn-datatable btn-icon btn-transparent-dark mr-2">
-                                                          <i data-feather="edit"></i>
-                                                      </button>
-                                                  </form>
-                                              @endcan
-                                              @can('eliminar-categoria')
-                                                  <div>
-                                                      @if ($categoria->caracteristica->estado == 1)
-                                                          <button class="btn btn-datatable btn-icon btn-transparent-dark"
-                                                              data-bs-toggle="modal"
-                                                              data-bs-target="#exampleModal-{{ $categoria->id }}"><i
-                                                                  data-feather="trash-2"></i>
-                                                          </button>
-                                                      @else
-                                                          <button class="btn btn-datatable btn-icon btn-transparent-dark"
-                                                              data-bs-toggle="modal"
-                                                              data-bs-target="#exampleModal-{{ $categoria->id }}"><i
-                                                                  data-feather="rotate-cw"></i>
-                                                          </button>
-                                                      @endif
-                                                  </div>
-                                              @endcan
+                                              <form action="{{ route('roles.edit', ['role' => $item]) }}" method="get">
+                                                  <button class="btn btn-datatable btn-icon btn-transparent-dark mr-2">
+                                                      <i data-feather="edit"></i>
+                                                  </button>
+                                              </form>
+                                              <div>
+                                                  <button class="btn btn-datatable btn-icon btn-transparent-dark"
+                                                      data-bs-toggle="modal"
+                                                      data-bs-target="#exampleModal-{{ $item->id }}"><i
+                                                          data-feather="trash-2"></i>
+                                                  </button>
+                                              </div>
                                           </div>
                                       </td>
                                   </tr>
 
                                   <!-- Modal -->
-                                  <div class="modal fade" id="exampleModal-{{ $categoria->id }}" tabindex="-1"
+                                  <div class="modal fade" id="exampleModal-{{ $item->id }}" tabindex="-1"
                                       aria-labelledby="exampleModalLabel" aria-hidden="true">
                                       <div class="modal-dialog">
                                           <div class="modal-content">
                                               <div class="modal-header">
-                                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Activar / Desactivar
-                                                      Categoria</h1>
-                                                  {{-- <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                      aria-label="Close">x</button> --}}
+                                                  <h1 class="modal-title fs-5" id="exampleModalLabel">Mensaje de
+                                                      confirmación</h1>
                                               </div>
                                               <div class="modal-body">
-                                                  {{ $categoria->caracteristica->estado == 1 ? '¿Desea desactivar la categoria?' : '¿Desea restaurar la categoria?' }}
+                                                  ¿Seguro que quieres eliminar el rol?
                                               </div>
                                               <div class="modal-footer">
                                                   <button type="button" class="btn btn-danger"
                                                       data-bs-dismiss="modal">Cancelar</button>
-                                                  <form
-                                                      action="{{ route('categorias.destroy', ['categoria' => $categoria->id]) }}"
+                                                  <form action="{{ route('roles.destroy', ['role' => $item->id]) }}"
                                                       method="post">
                                                       @method('DELETE')
                                                       @csrf

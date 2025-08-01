@@ -11,11 +11,12 @@
                     <div class="nav-link-icon"><i data-feather="activity"></i></div>
                     Panel
                 </a>
-
-                <a class="nav-link" href="{{ route('categorias.index') }}">
-                    <div class="nav-link-icon"><i data-feather="archive"></i></div>
-                    Categorías
-                </a>
+                @can('ver-categoria')
+                    <a class="nav-link" href="{{ route('categorias.index') }}">
+                        <div class="nav-link-icon"><i data-feather="archive"></i></div>
+                        Categorías
+                    </a>
+                @endcan
 
                 <a class="nav-link" href="{{ route('presentaciones.index') }}">
                     <div class="nav-link-icon"><i data-feather="codepen"></i></div>
@@ -214,13 +215,13 @@
                             href="multi-tenant-select.html">Multi-Tenant Registration</a></nav>
                 </div> --}}
                 <div class="sidenav-menu-heading">Addons</div>
-                <a class="nav-link" href="#">
-                    <div class="nav-link-icon"><i data-feather="bar-chart"></i></div>
-                    Charts
+                <a class="nav-link" href="{{ route('users.index') }}">
+                    <div class="nav-link-icon"><i data-feather="user-plus"></i></div>
+                    Usuarios
                 </a>
-                <a class="nav-link" href="#">
-                    <div class="nav-link-icon"><i data-feather="filter"></i></div>
-                    Tables
+                <a class="nav-link" href="{{ route('roles.index') }}">
+                    <div class="nav-link-icon"><i data-feather="clipboard"></i></div>
+                    Roles
                 </a>
             </div>
         </div>
